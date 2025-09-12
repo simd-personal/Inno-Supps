@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inno Supps PromptOps MVP - Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .module-card:hover { transform: translateY(-2px); }
+        .module-card { transition: all 0.2s ease; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">Inno Supps PromptOps</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">Admin User</span>
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-medium">A</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Welcome to PromptOps</h2>
+            <p class="text-gray-600">AI-powered tools for supplement marketing automation</p>
+        </div>
+
+        <!-- Modules Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Offer Creator -->
+            <div class="module-card bg-white rounded-lg shadow-sm border border-gray-200 p-6 cursor-pointer" onclick="showDemo('offer')">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Offer Creator</h3>
+                </div>
+                <p class="text-gray-600 text-sm">Generate compelling offers for supplement products</p>
+            </div>
+
+            <!-- Cold Email Writer -->
+            <div class="module-card bg-white rounded-lg shadow-sm border border-gray-200 p-6 cursor-pointer" onclick="showDemo('email')">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Cold Email Writer</h3>
+                </div>
+                <p class="text-gray-600 text-sm">Create high-converting cold email campaigns</p>
+            </div>
+
+            <!-- Ad Writer -->
+            <div class="module-card bg-white rounded-lg shadow-sm border border-gray-200 p-6 cursor-pointer" onclick="showDemo('ads')">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Ad Writer</h3>
+                </div>
+                <p class="text-gray-600 text-sm">Generate ad variants for different platforms</p>
+            </div>
+
+            <!-- Workflow Builder -->
+            <div class="module-card bg-white rounded-lg shadow-sm border border-gray-200 p-6 cursor-pointer" onclick="showDemo('workflow')">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Workflow Builder</h3>
+                </div>
+                <p class="text-gray-600 text-sm">Build n8n workflows from plain English</p>
+            </div>
+
+            <!-- Tools Directory -->
+            <div class="module-card bg-white rounded-lg shadow-sm border border-gray-200 p-6 cursor-pointer" onclick="showDemo('tools')">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-gray-500 rounded-lg flex items-center justify-center mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Tools Directory</h3>
+                </div>
+                <p class="text-gray-600 text-sm">Browse available tools and integrations</p>
+            </div>
+        </div>
+
+        <!-- Demo Output Section -->
+        <div id="demo-output" class="bg-white rounded-lg shadow-sm border border-gray-200 p-6" style="display: none;">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Demo Output</h3>
+            <div id="demo-content"></div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                    Recent Activity
+                </h3>
+            </div>
+            <div class="p-6">
+                <div class="text-center py-8">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-gray-500">No recent activity</p>
+                    <p class="text-sm text-gray-400">Start by creating your first generation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showDemo(type) {
+            const output = document.getElementById('demo-output');
+            const content = document.getElementById('demo-content');
+            
+            let demoData = {};
+            
+            switch(type) {
+                case 'offer':
+                    demoData = {
+                        title: "Offer Creator Demo",
+                        input: {
+                            audience: "busy professionals aged 30-50 struggling with belly fat",
+                            pain: "tried every diet but can't lose stubborn belly fat",
+                            solution: "fat loss supplement with clinically-proven ingredients",
+                            proof: "clinical study shows 12% more fat loss, 10,000+ customers, 30-day guarantee",
+                            price: "$97 with 50% discount for first-time buyers",
+                            guarantee: "30-day money-back guarantee"
+                        },
+                        output: {
+                            promise: "Finally Lose Stubborn Belly Fat in 30 Days - Guaranteed",
+                            proof_pillars: [
+                                "Clinical study shows 12% more fat loss",
+                                "10,000+ customers lost 15+ lbs",
+                                "30-day money-back guarantee"
+                            ],
+                            price: "$97 (50% off - Limited Time)",
+                            guarantee: "30-day money-back guarantee",
+                            cta: "Start Your Transformation Today",
+                            landing_blurb: "Join thousands who've finally lost stubborn belly fat with our clinically-proven formula. 30-day guarantee."
+                        }
+                    };
+                    break;
+                case 'email':
+                    demoData = {
+                        title: "Cold Email Writer Demo",
+                        input: {
+                            audience: "fitness enthusiasts hitting muscle plateaus",
+                            pain: "working out hard but not seeing muscle gains",
+                            proof: "proven formula used by 5,000+ athletes",
+                            cta: "schedule a free consultation"
+                        },
+                        output: {
+                            subject: "Break Through Your Muscle Plateau",
+                            body: "Hi [Name], I noticed you're serious about fitness but hitting a plateau. Our clients typically see 20% more gains in 8 weeks. Want to learn how?",
+                            tone: "professional but friendly",
+                            compliance_notes: "Avoid specific claims about muscle growth percentages"
+                        }
+                    };
+                    break;
+                case 'ads':
+                    demoData = {
+                        title: "Ad Writer Demo",
+                        input: {
+                            channel: "Meta Facebook",
+                            audience: "men 25-45 interested in fitness and supplements",
+                            pain_or_benefit: "muscle building and strength gains"
+                        },
+                        output: {
+                            proof_based: {
+                                hook: "Science-Backed Muscle Growth Formula",
+                                body: "Clinical study shows 23% more muscle mass in 8 weeks",
+                                cta: "Get Your Free Sample"
+                            },
+                            transformation: {
+                                hook: "From Skinny to Strong in 60 Days",
+                                body: "See the transformation that changed everything",
+                                cta: "Start Your Journey"
+                            },
+                            social_proof: {
+                                hook: "Join 10,000+ Men Who Built Muscle",
+                                body: "Real results from real people - see their stories",
+                                cta: "Join the Community"
+                            }
+                        }
+                    };
+                    break;
+                case 'workflow':
+                    demoData = {
+                        title: "Workflow Builder Demo",
+                        input: {
+                            description: "When a new lead fills out the fat loss supplement form, send them a welcome email, add them to the CRM, and notify the sales team in Slack"
+                        },
+                        output: {
+                            summary: "Lead processing workflow that sends welcome email, adds contact to CRM, and notifies sales team via Slack",
+                            nodes: ["Webhook Trigger", "Send Welcome Email", "Add to CRM", "Notify Sales Team"],
+                            connections: "Webhook → Email & CRM → Slack"
+                        }
+                    };
+                    break;
+                case 'tools':
+                    demoData = {
+                        title: "Tools Directory Demo",
+                        tools: [
+                            { name: "Offer Creator", status: "Active", features: ["FDA Compliance", "A/B Testing", "ROI Tracking"] },
+                            { name: "Cold Email Writer", status: "Active", features: ["Spam Score Check", "Personalization", "Follow-up Sequences"] },
+                            { name: "Ad Writer", status: "Active", features: ["Multi-Platform", "A/B Testing", "ROAS Optimization"] },
+                            { name: "Workflow Builder", status: "Active", features: ["Visual Builder", "n8n Integration", "Custom Triggers"] },
+                            { name: "Compliance Checker", status: "Active", features: ["Real-time Checking", "Risk Scoring", "Auto-correction"] }
+                        ]
+                    };
+                    break;
+            }
+            
+            content.innerHTML = `
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">Input:</h4>
+                        <pre class="bg-gray-50 p-3 rounded-md text-sm overflow-x-auto">${JSON.stringify(demoData.input, null, 2)}</pre>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-medium text-gray-700 mb-2">AI Generated Output:</h4>
+                        <pre class="bg-green-50 p-3 rounded-md text-sm overflow-x-auto">${JSON.stringify(demoData.output, null, 2)}</pre>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t">
+                        <div class="flex items-center text-sm text-gray-500">
+                            <svg class="w-4 h-4 text-green-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            AI Generated Successfully
+                        </div>
+                        <div class="flex items-center text-sm text-gray-500">
+                            Score: 85%
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            output.style.display = 'block';
+            output.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
