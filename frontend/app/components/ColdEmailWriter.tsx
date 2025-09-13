@@ -120,20 +120,23 @@ export default function ColdEmailWriter() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
+    <div className="content-body">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">AI Cold Email Writer</h1>
-        <p className="text-gray-400">Generate personalized cold emails that actually convert</p>
+        <h1 className="text-heading-1 text-white mb-2">AI Cold Email Writer</h1>
+        <p className="text-neutral-400 text-body-1">Generate personalized cold emails that actually convert</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Prospect Information Form */}
-        <div className="bg-gray-800 rounded-lg p-6">
-          <h2 className="text-xl font-bold mb-6 flex items-center">
-            <User className="w-5 h-5 mr-2" />
-            Prospect Information
-          </h2>
+        <div className="card">
+          <div className="card-header">
+            <h2 className="card-title flex items-center">
+              <User className="w-5 h-5 mr-2" />
+              Prospect Information
+            </h2>
+            <p className="card-subtitle">Enter details about your prospect for personalized outreach</p>
+          </div>
           
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -145,7 +148,7 @@ export default function ColdEmailWriter() {
                   value={prospectInfo.name}
                   onChange={handleInputChange}
                   placeholder="John Smith"
-                  className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="input"
                   required
                 />
               </div>
@@ -157,7 +160,7 @@ export default function ColdEmailWriter() {
                   value={prospectInfo.company}
                   onChange={handleInputChange}
                   placeholder="TechCorp Inc."
-                  className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="input"
                   required
                 />
               </div>
@@ -172,7 +175,7 @@ export default function ColdEmailWriter() {
                   value={prospectInfo.role}
                   onChange={handleInputChange}
                   placeholder="VP of Marketing"
-                  className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="input"
                   required
                 />
               </div>
@@ -184,7 +187,7 @@ export default function ColdEmailWriter() {
                   value={prospectInfo.industry}
                   onChange={handleInputChange}
                   placeholder="SaaS"
-                  className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="input"
                   required
                 />
               </div>
@@ -198,7 +201,7 @@ export default function ColdEmailWriter() {
                 value={prospectInfo.email}
                 onChange={handleInputChange}
                 placeholder="john@techcorp.com"
-                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input"
                 required
               />
             </div>
@@ -210,7 +213,7 @@ export default function ColdEmailWriter() {
                 value={prospectInfo.recent_activity}
                 onChange={handleInputChange}
                 placeholder="e.g., Just raised Series B funding, expanding sales team, launched new product..."
-                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input"
                 rows={3}
               />
             </div>
@@ -222,7 +225,7 @@ export default function ColdEmailWriter() {
                 value={prospectInfo.pain_points}
                 onChange={handleInputChange}
                 placeholder="e.g., Struggling with lead generation, low conversion rates, manual processes..."
-                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input"
                 rows={3}
               />
             </div>
@@ -232,7 +235,7 @@ export default function ColdEmailWriter() {
               <select
                 value={campaignType}
                 onChange={(e) => setCampaignType(e.target.value)}
-                className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input"
               >
                 <option value="initial">Initial Outreach</option>
                 <option value="follow_up">Follow-up</option>
@@ -244,7 +247,7 @@ export default function ColdEmailWriter() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center"
+              className="btn-primary w-full"
             >
               {loading ? (
                 <>
@@ -262,31 +265,32 @@ export default function ColdEmailWriter() {
         </div>
 
         {/* Generated Email */}
-        <div className="bg-gray-800 rounded-lg p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold flex items-center">
+        <div className="card">
+          <div className="card-header">
+            <h2 className="card-title flex items-center">
               <Mail className="w-5 h-5 mr-2" />
               Generated Email
             </h2>
+            <p className="card-subtitle">AI-generated personalized cold email</p>
             {generatedEmail && (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 mt-4">
                 <button
                   onClick={regenerateEmail}
-                  className="p-2 hover:bg-gray-700 rounded-lg"
+                  className="p-2 hover:bg-neutral-700 rounded-lg"
                   title="Regenerate"
                 >
                   <RefreshCw className="w-4 h-4" />
                 </button>
                 <button
                   onClick={saveEmail}
-                  className="p-2 hover:bg-gray-700 rounded-lg"
+                  className="p-2 hover:bg-neutral-700 rounded-lg"
                   title="Save"
                 >
                   <Save className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => copyToClipboard(generatedEmail.body)}
-                  className="p-2 hover:bg-gray-700 rounded-lg"
+                  className="p-2 hover:bg-neutral-700 rounded-lg"
                   title="Copy"
                 >
                   <Copy className="w-4 h-4" />
@@ -298,31 +302,31 @@ export default function ColdEmailWriter() {
           {generatedEmail ? (
             <div className="space-y-6">
               {/* Email Preview */}
-              <div className="bg-gray-700 rounded-lg p-4">
+              <div className="bg-neutral-800 rounded-lg p-4">
                 <div className="mb-4">
-                  <div className="text-sm text-gray-400 mb-1">To: {prospectInfo.email}</div>
-                  <div className="text-sm text-gray-400 mb-1">From: you@yourcompany.com</div>
-                  <div className="text-sm text-gray-400 mb-3">Subject: {generatedEmail.subject}</div>
+                  <div className="text-sm text-neutral-400 mb-1">To: {prospectInfo.email}</div>
+                  <div className="text-sm text-neutral-400 mb-1">From: you@yourcompany.com</div>
+                  <div className="text-sm text-neutral-400 mb-3">Subject: {generatedEmail.subject}</div>
                 </div>
-                <div className="text-gray-300 whitespace-pre-wrap">
+                <div className="text-neutral-300 whitespace-pre-wrap">
                   {generatedEmail.body}
                 </div>
               </div>
 
               {/* Performance Metrics */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-700 rounded-lg p-4">
+                <div className="bg-neutral-800 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-gray-400">Personalization Score</span>
+                    <span className="text-sm text-neutral-400">Personalization Score</span>
                     <Star className="w-4 h-4 text-yellow-400" />
                   </div>
                   <div className="text-2xl font-bold text-yellow-400">
                     {generatedEmail.personalization_score}/100
                   </div>
                 </div>
-                <div className="bg-gray-700 rounded-lg p-4">
+                <div className="bg-neutral-800 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-gray-400">Reply Probability</span>
+                    <span className="text-sm text-neutral-400">Reply Probability</span>
                     <TrendingUp className="w-4 h-4 text-green-400" />
                   </div>
                   <div className="text-2xl font-bold text-green-400">
@@ -334,11 +338,11 @@ export default function ColdEmailWriter() {
               {/* Tone and Compliance */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-sm text-gray-400">Tone:</span>
+                  <span className="text-sm text-neutral-400">Tone:</span>
                   <div className="text-white font-medium">{generatedEmail.tone}</div>
                 </div>
                 <div>
-                  <span className="text-sm text-gray-400">Compliance:</span>
+                  <span className="text-sm text-neutral-400">Compliance:</span>
                   <div className="text-green-400 font-medium flex items-center">
                     <CheckCircle className="w-4 h-4 mr-1" />
                     Compliant
@@ -353,7 +357,7 @@ export default function ColdEmailWriter() {
                     <CheckCircle className="w-5 h-5 text-green-400 mr-2 mt-0.5" />
                     <div>
                       <h4 className="font-medium text-green-400 mb-1">Compliance Notes</h4>
-                      <p className="text-sm text-gray-300">{generatedEmail.compliance_notes}</p>
+                      <p className="text-sm text-neutral-300">{generatedEmail.compliance_notes}</p>
                     </div>
                   </div>
                 </div>
@@ -364,7 +368,7 @@ export default function ColdEmailWriter() {
                 <div>
                   <button
                     onClick={() => setShowFollowUps(!showFollowUps)}
-                    className="flex items-center text-blue-400 hover:text-blue-300 mb-4"
+                    className="flex items-center text-red-400 hover:text-red-300 mb-4"
                   >
                     <MessageSquare className="w-4 h-4 mr-2" />
                     View Follow-up Sequence ({generatedEmail.follow_up_sequence.length} emails)
@@ -374,15 +378,15 @@ export default function ColdEmailWriter() {
                   {showFollowUps && (
                     <div className="space-y-4">
                       {generatedEmail.follow_up_sequence.map((email, index) => (
-                        <div key={index} className="bg-gray-700 rounded-lg p-4">
+                        <div key={index} className="bg-neutral-800 rounded-lg p-4">
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-sm font-medium text-blue-400">
+                            <span className="text-sm font-medium text-red-400">
                               Day {email.day}
                             </span>
-                            <span className="text-xs text-gray-400">{email.purpose}</span>
+                            <span className="text-xs text-neutral-400">{email.purpose}</span>
                           </div>
-                          <div className="text-sm text-gray-400 mb-2">Subject: {email.subject}</div>
-                          <div className="text-sm text-gray-300 whitespace-pre-wrap">
+                          <div className="text-sm text-neutral-400 mb-2">Subject: {email.subject}</div>
+                          <div className="text-sm text-neutral-300 whitespace-pre-wrap">
                             {email.body}
                           </div>
                         </div>
@@ -394,18 +398,18 @@ export default function ColdEmailWriter() {
 
               {/* Action Buttons */}
               <div className="flex space-x-4">
-                <button className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center justify-center">
+                <button className="btn-primary flex-1">
                   <Send className="w-4 h-4 mr-2" />
                   Send Email
                 </button>
-                <button className="flex-1 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-lg flex items-center justify-center">
+                <button className="btn-secondary flex-1">
                   <Download className="w-4 h-4 mr-2" />
                   Export
                 </button>
               </div>
             </div>
           ) : (
-            <div className="text-center text-gray-400 py-12">
+            <div className="text-center text-neutral-400 py-12">
               <Mail className="w-12 h-12 mx-auto mb-4 opacity-50" />
               <p>Fill in the prospect information and generate your first cold email</p>
             </div>
@@ -415,39 +419,42 @@ export default function ColdEmailWriter() {
 
       {/* Saved Emails */}
       {savedEmails.length > 0 && (
-        <div className="mt-8 bg-gray-800 rounded-lg p-6">
-          <h2 className="text-xl font-bold mb-6 flex items-center">
-            <Save className="w-5 h-5 mr-2" />
-            Saved Emails
-          </h2>
+        <div className="mt-8 card">
+          <div className="card-header">
+            <h2 className="card-title flex items-center">
+              <Save className="w-5 h-5 mr-2" />
+              Saved Emails
+            </h2>
+            <p className="card-subtitle">Your previously generated emails</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {savedEmails.map((email, index) => (
-              <div key={index} className="bg-gray-700 rounded-lg p-4">
+              <div key={index} className="bg-neutral-800 rounded-lg p-4">
                 <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-medium truncate">{email.subject}</h3>
-                  <button className="p-1 hover:bg-gray-600 rounded">
+                  <h3 className="font-medium truncate text-white">{email.subject}</h3>
+                  <button className="p-1 hover:bg-neutral-700 rounded">
                     <MoreVertical className="w-4 h-4" />
                   </button>
                 </div>
-                <div className="text-sm text-gray-400 mb-2">
+                <div className="text-sm text-neutral-400 mb-2">
                   {email.personalization_score}/100 personalization
                 </div>
-                <div className="text-sm text-gray-300 line-clamp-3">
+                <div className="text-sm text-neutral-300 line-clamp-3">
                   {email.body.substring(0, 100)}...
                 </div>
                 <div className="flex items-center justify-between mt-4">
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => copyToClipboard(email.body)}
-                      className="p-1 hover:bg-gray-600 rounded"
+                      className="p-1 hover:bg-neutral-700 rounded"
                     >
                       <Copy className="w-4 h-4" />
                     </button>
-                    <button className="p-1 hover:bg-gray-600 rounded">
+                    <button className="p-1 hover:bg-neutral-700 rounded">
                       <Edit className="w-4 h-4" />
                     </button>
                   </div>
-                  <button className="p-1 hover:bg-gray-600 rounded text-red-400">
+                  <button className="p-1 hover:bg-neutral-700 rounded text-red-400">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
