@@ -6,7 +6,7 @@ import time
 from contextlib import asynccontextmanager
 
 from database import get_db, init_db
-from routes import auth, generations, templates, workflows, compliance, slack, ai_agents, jobs
+from routes import auth, generations, templates, workflows, compliance, slack, ai_agents, jobs, integrations
 from services.llm_service import LLMService
 from services.redis_service import RedisService
 from config import settings
@@ -58,6 +58,7 @@ app.include_router(compliance.router, prefix="/api/compliance", tags=["complianc
 app.include_router(slack.router, prefix="/api/slack", tags=["slack"])
 app.include_router(ai_agents.router, tags=["ai-agents"])
 app.include_router(jobs.router, prefix="/api", tags=["jobs"])
+app.include_router(integrations.router, prefix="/api", tags=["integrations"])
 
 @app.get("/")
 async def root():
