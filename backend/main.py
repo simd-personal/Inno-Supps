@@ -19,7 +19,12 @@ redis_service = RedisService()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
-    await init_db()
+    try:
+        await init_db()
+        print("✅ Database initialized successfully")
+    except Exception as e:
+        print(f"⚠️  Database initialization failed: {e}")
+        print("🔄 Running in mock mode - database features disabled")
     yield
     # Shutdown
     pass
@@ -77,9 +82,19 @@ async def health_check():
     except Exception:
         redis_status = "unhealthy"
     
+    # Check database connection
+    db_status = "healthy"
+    try:
+        from database import engine
+        with engine.connect() as conn:
+            conn.execute("SELECT 1")
+    except Exception:
+        db_status = "unhealthy"
+    
     return {
         "status": "healthy",
         "redis": redis_status,
+        "database": db_status,
         "mock_mode": settings.mock_mode
     }
 

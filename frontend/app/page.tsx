@@ -7,6 +7,10 @@ import ColdEmailWriter from './components/ColdEmailWriter'
 import RevenueRushEcosystem from './components/RevenueRushEcosystem'
 import UnifiedAnalytics from './components/UnifiedAnalytics'
 import CrossPlatformNotifications from './components/CrossPlatformNotifications'
+import ProspectsPage from './prospects/page'
+import CampaignsPage from './campaigns/page'
+import InboxPage from './inbox/page'
+import SettingsPage from './settings/page'
 import { 
   BarChart3, 
   Server, 
@@ -44,7 +48,8 @@ import {
   Trash2,
   Copy,
   Share,
-  ExternalLink
+  ExternalLink,
+  Megaphone
 } from 'lucide-react'
 
 export default function Home() {
@@ -56,6 +61,9 @@ export default function Home() {
 
   const sidebarItems = [
     { id: 'overview', label: 'Overview', icon: BarChart3, active: false },
+    { id: 'prospects', label: 'Prospects', icon: Users, active: false },
+    { id: 'campaigns', label: 'Campaigns', icon: Megaphone, active: false },
+    { id: 'inbox', label: 'Inbox', icon: Mail, active: false },
     { id: 'unified-analytics', label: 'Unified Analytics', icon: TrendingUp, active: false },
     { id: 'revenue-rush-ecosystem', label: 'Revenue Rush Ecosystem', icon: Server, active: false },
     { id: 'operating-system', label: 'Operating System', icon: Server, active: false },
@@ -111,6 +119,14 @@ export default function Home() {
       case 'overview':
         console.log('Rendering Dashboard component')
         return <Dashboard />
+      case 'prospects':
+        return <ProspectsPage />
+      case 'campaigns':
+        return <CampaignsPage />
+      case 'inbox':
+        return <InboxPage />
+      case 'settings':
+        return <SettingsPage />
       case 'unified-analytics':
         return <UnifiedAnalytics />
       case 'revenue-rush-ecosystem':
@@ -187,24 +203,25 @@ export default function Home() {
       <div className="flex">
         {/* Sidebar */}
         <div className={`sidebar transition-all duration-300 ${sidebarCollapsed ? 'w-16' : 'w-64'}`} style={{ width: sidebarCollapsed ? '64px' : '280px' }}>
-          <div className="sidebar-header">
-            <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">I</span>
+          <div className="flex flex-col h-full">
+            <div className="sidebar-header">
+              <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">I</span>
+                </div>
+                {!sidebarCollapsed && <span className="text-heading-4 text-white">Inno</span>}
               </div>
-              {!sidebarCollapsed && <span className="text-heading-4 text-white">Inno</span>}
+                <button 
+                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                  className="p-1 hover:bg-neutral-700 rounded transition-colors"
+                >
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-              <button 
-                onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                className="p-1 hover:bg-neutral-700 rounded transition-colors"
-              >
-                <ChevronDown className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
 
-            <nav className="sidebar-nav">
+            <nav className="sidebar-nav flex-1">
               {sidebarItems.map((item) => (
                 <div key={item.id}>
                   <button
@@ -234,23 +251,24 @@ export default function Home() {
               ))}
             </nav>
 
-          {/* User Profile - Now at bottom of sidebar */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t" style={{ borderColor: 'var(--neutral-800)' }}>
-            <div className="flex items-center space-x-3 p-3 rounded-lg" style={{ backgroundColor: 'var(--neutral-800)' }}>
-              <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">S</span>
-              </div>
-              {!sidebarCollapsed && (
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate text-white">Simba</p>
-                  <p className="text-xs text-neutral-400 truncate">simba@inno-supps.com</p>
-                  <div className="flex items-center space-x-2 mt-1">
-                    <span className="badge badge-primary">Pro</span>
-                    <span className="badge badge-success">RR Access</span>
-                  </div>
+            {/* User Profile - Now at bottom of sidebar */}
+            <div className="p-4 border-t" style={{ borderColor: 'var(--neutral-800)' }}>
+              <div className="flex items-center space-x-3 p-3 rounded-lg" style={{ backgroundColor: 'var(--neutral-800)' }}>
+                <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">S</span>
                 </div>
-              )}
-              {!sidebarCollapsed && <MoreVertical className="w-4 h-4" />}
+                {!sidebarCollapsed && (
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium truncate text-white">Simba</p>
+                    <p className="text-xs text-neutral-400 truncate">simba@inno-supps.com</p>
+                    <div className="flex items-center space-x-2 mt-1">
+                      <span className="badge badge-primary">Pro</span>
+                      <span className="badge badge-success">RR Access</span>
+                    </div>
+                  </div>
+                )}
+                {!sidebarCollapsed && <MoreVertical className="w-4 h-4" />}
+              </div>
             </div>
           </div>
         </div>

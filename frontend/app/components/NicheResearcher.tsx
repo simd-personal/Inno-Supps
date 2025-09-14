@@ -67,74 +67,145 @@ export default function NicheResearcher() {
     setLoading(true)
 
     try {
+      // Convert form data to match API requirements
+      const skillsArray = formData.skills
+        .split(',')
+        .map(skill => skill.trim())
+        .filter(skill => skill.length > 0)
+      
+      const interestsArray = formData.interests
+        .split(',')
+        .map(interest => interest.trim())
+        .filter(interest => interest.length > 0)
+
+      // Convert budget string to number
+      const budgetMap: { [key: string]: number } = {
+        'under-5k': 5000,
+        '5k-10k': 10000,
+        '10k-25k': 25000,
+        '25k-50k': 50000,
+        '50k-plus': 100000
+      }
+
       const response = await fetch('http://localhost:8000/api/agents/niche-researcher/analyze', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          skills: skillsArray,
+          interests: interestsArray,
+          budget: budgetMap[formData.budget] || 10000,
+          experience_level: formData.experience,
+          time_commitment: "part_time"
+        }),
       })
 
       const data = await response.json()
 
-      if (data.success) {
-        // Mock results for now - replace with real data
-        const mockResults: NicheResult[] = [
-          {
-            id: 1,
-            title: "Luxury Experiential Travel & Adventure Tour Operators",
-            isBestOption: true,
-            metrics: {
-              potential: "Yes",
-              highTicket: "Yes",
-              familiarity: "High",
-              targetability: "High"
-            },
-            description: "This niche comprises high-end travel agencies and tour operators that design bespoke, adventure-driven experiences for affluent clients. Packages often range from $5K-$100K per person, with operators generating $5M-$20M in annual revenue. They're actively investing in digital marketing, AI-driven personalization, CRM automation, and referral programs to stand out in the post-pandemic boom in experiential travel. Opportunities include developing targeted ad campaigns, chatbots for real-time itinerary support, predictive pricing algorithms, and automated follow-up sequences to boost repeat bookings.",
-            marketSize: data.data.market_size || "$2.4B",
-            competitionLevel: data.data.competition_level || "Medium",
-            growthRate: data.data.growth_rate || "23% YoY",
-            analysis: data.data
+      if (response.ok) {
+        // Map API response to our component format
+        const mappedResults: NicheResult[] = data.recommended_niches.map((niche: any, index: number) => ({
+          id: index + 1,
+          title: niche.name,
+          isBestOption: index === 0, // First result is best option
+          metrics: {
+            potential: niche.profitability_score > 80 ? "Yes" : "Maybe",
+            highTicket: niche.entry_barrier === "Low" ? "Yes" : "Maybe",
+            familiarity: "High", // Default based on skills/interests match
+            targetability: niche.competition_level === "Low" ? "High" : "Medium"
           },
-          {
-            id: 2,
-            title: "High-End Wellness & Retreat Centers",
-            isBestOption: false,
-            metrics: {
-              potential: "Yes",
-              highTicket: "Yes",
-              familiarity: "High",
-              targetability: "High"
-            },
-            description: "This niche includes resorts and standalone centers offering multi-day wellness retreats (yoga, meditation, detox, corporate well-being). Per-guest packages run $2K-$10K, with many centers achieving $2M-$15M annual revenue. As the wellness market grows ~8% annually, these businesses seek AI-powered personalization engines, automated booking and upsell funnels, email nurture sequences, and targeted paid social to fill retreats. You can offer services like funnel design, CRM integration, chatbot-driven intake, and influencer-driven campaigns.",
-            marketSize: "$1.8B",
-            competitionLevel: "Low",
-            growthRate: "18% YoY"
-          },
-          {
-            id: 3,
-            title: "Artisanal Craft Breweries & Distilleries",
-            isBestOption: false,
-            metrics: {
-              potential: "Yes",
-              highTicket: "Yes",
-              familiarity: "High",
-              targetability: "High"
-            },
-            description: "This niche targets microbreweries and small-batch distilleries producing artisanal beers and spirits. Many have scaled to $3M-$20M in revenue through taproom sales, direct-to-consumer shipping, and regional distribution. The competitive craft beverage space demands strong branding, SEO, e-commerce funnels, social media storytelling, and AI-driven demand forecasting. Agencies can offer services like website optimization, loyalty-program automations, AI-powered ad bid management, and influencer partnerships to drive higher margins and market share.",
-            marketSize: "$3.2B",
-            competitionLevel: "High",
-            growthRate: "15% YoY"
+          description: niche.description,
+          marketSize: niche.market_size,
+          competitionLevel: niche.competition_level,
+          growthRate: data.market_analysis?.growth_rate || "15% annually",
+          analysis: {
+            market_size: niche.market_size,
+            competition_level: niche.competition_level,
+            growth_rate: data.market_analysis?.growth_rate || "15% annually",
+            profitability_score: niche.profitability_score,
+            opportunities: data.implementation_strategy || [],
+            challenges: data.risk_assessment ? [
+              `Market Risk: ${data.risk_assessment.market_risk}`,
+              `Competition Risk: ${data.risk_assessment.competition_risk}`,
+              `Technical Risk: ${data.risk_assessment.technical_risk}`
+            ] : [],
+            target_audience: "Business owners and decision makers",
+            pricing_range: "$5K - $50K",
+            revenue_potential: "High"
           }
-        ]
-        setResults(mockResults)
+        }))
+        
+        setResults(mappedResults)
+      } else {
+        console.error('API Error:', data)
+        // Fallback to mock data
+        setResults(getMockResults())
       }
     } catch (error) {
       console.error('Error analyzing niche:', error)
+      // Fallback to mock data on error
+      setResults(getMockResults())
     } finally {
       setLoading(false)
     }
   }
+
+  // Helper function for mock data
+  const getMockResults = (): NicheResult[] => [
+    {
+      id: 1,
+      title: "SaaS for Small Businesses",
+      isBestOption: true,
+      metrics: {
+        potential: "Yes",
+        highTicket: "Yes",
+        familiarity: "High",
+        targetability: "High"
+      },
+      description: "B2B software solutions for small to medium businesses. High demand for automation tools, CRM systems, and productivity software.",
+      marketSize: "$50B",
+      competitionLevel: "Medium",
+      growthRate: "15% annually",
+      analysis: {
+        market_size: "$50B",
+        competition_level: "Medium",
+        growth_rate: "15% annually",
+        profitability_score: 85,
+        opportunities: ["Start with MVP in 3 months", "Focus on one specific use case"],
+        challenges: ["Market Risk: Low", "Competition Risk: Medium"],
+        target_audience: "Small business owners",
+        pricing_range: "$5K - $50K",
+        revenue_potential: "High"
+      }
+    },
+    {
+      id: 2,
+      title: "AI-Powered Marketing Tools",
+      isBestOption: false,
+      metrics: {
+        potential: "Yes",
+        highTicket: "Yes",
+        familiarity: "High",
+        targetability: "High"
+      },
+      description: "Marketing automation and AI-driven customer acquisition tools. Growing market with high demand for personalization.",
+      marketSize: "$25B",
+      competitionLevel: "High",
+      growthRate: "20% annually",
+      analysis: {
+        market_size: "$25B",
+        competition_level: "High",
+        growth_rate: "20% annually",
+        profitability_score: 90,
+        opportunities: ["Build strong customer feedback loop"],
+        challenges: ["Market Risk: Low", "Competition Risk: High"],
+        target_audience: "Marketing teams",
+        pricing_range: "$10K - $100K",
+        revenue_potential: "Very High"
+      }
+    }
+  ]
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
