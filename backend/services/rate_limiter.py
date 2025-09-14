@@ -4,8 +4,8 @@ Rate limiter service using Redis token bucket algorithm
 
 import time
 from typing import Optional
-from backend.services.redis_cache import cache
-from backend.config import settings
+from services.redis_cache import cache
+from config import settings
 
 class RateLimiter:
     def __init__(self):

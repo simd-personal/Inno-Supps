@@ -5,8 +5,8 @@ Transcription providers (OpenAI Whisper, etc.)
 from typing import Dict, Any, Optional
 from datetime import datetime
 from .base import BaseProvider
-from backend.config import settings
-from backend.services.llm_service import LLMService
+from config import settings
+from services.llm_service import LLMService
 
 class OpenAIWhisperProvider(BaseProvider):
     """OpenAI Whisper integration provider for transcription"""

@@ -3,11 +3,11 @@ Email-related background jobs
 """
 
 from typing import Dict, Any
-from backend.services.job_service import job
-from backend.agents.tools import classify_intent, draft_email
-from backend.database import Thread, Message, MessageDirection, get_db
-from backend.services.rate_limiter import email_rate_limiter
-from backend.services.llm_service import LLMService
+from services.job_service import job
+from agents.tools import classify_intent, draft_email
+from database import Thread, Message, MessageDirection, get_db
+from services.rate_limiter import email_rate_limiter
+from services.llm_service import LLMService
 from sqlalchemy.orm import Session
 
 llm_service = LLMService()

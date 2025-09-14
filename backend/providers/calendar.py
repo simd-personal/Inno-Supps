@@ -5,7 +5,7 @@ Calendar providers (Google Calendar, Outlook, Calendly)
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 from .base import BaseProvider
-from backend.config import settings
+from config import settings
 
 class GoogleCalendarProvider(BaseProvider):
     """Google Calendar integration provider"""

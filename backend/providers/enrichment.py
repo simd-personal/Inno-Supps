@@ -5,7 +5,7 @@ Data enrichment providers (Apollo, etc.)
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 from .base import BaseProvider
-from backend.config import settings
+from config import settings
 
 class ApolloProvider(BaseProvider):
     """Apollo.io integration provider for data enrichment"""

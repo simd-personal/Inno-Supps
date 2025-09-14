@@ -6,7 +6,7 @@ import json
 import redis
 from typing import Any, Optional, List, Dict
 from datetime import datetime, timedelta
-from backend.config import settings
+from config import settings
 
 class RedisCache:
     def __init__(self):

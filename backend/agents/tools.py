@@ -5,9 +5,9 @@ Agent tools implementation
 import json
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
-from backend.agents.tool_registry import tool_registry
-from backend.services.llm_service import LLMService
-from backend.config import settings
+from agents.tool_registry import tool_registry
+from services.llm_service import LLMService
+from config import settings
 
 # Initialize LLM service
 llm_service = LLMService()

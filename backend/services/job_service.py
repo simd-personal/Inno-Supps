@@ -6,12 +6,13 @@ import json
 import hashlib
 from datetime import datetime, timedelta
 from typing import Any, Dict, Optional, Callable
-from rq import Queue, Worker, Connection
+from rq import Queue, Worker
+from rq import Connection
 from rq.job import Job
 from rq_scheduler import Scheduler
-from backend.config import settings
-from backend.services.redis_cache import cache
-from backend.database import Job as JobModel, JobStatus, get_db
+from config import settings
+from services.redis_cache import cache
+from database import Job as JobModel, JobStatus, get_db
 from sqlalchemy.orm import Session
 
 # Initialize Redis connection

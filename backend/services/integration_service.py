@@ -3,8 +3,8 @@ Integration service for managing all providers
 """
 
 from typing import Dict, Any, List, Optional, Type
-from backend.database import Integration, IntegrationType, get_db
-from backend.providers import (
+from database import Integration, IntegrationType, get_db
+from providers import (
     GmailProvider, M365Provider,
     GoogleCalendarProvider, OutlookCalendarProvider, CalendlyProvider,
     HubSpotProvider, SalesforceProvider,

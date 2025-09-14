@@ -5,7 +5,7 @@ Chat providers (Slack)
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 from .base import BaseProvider
-from backend.config import settings
+from config import settings
 
 class SlackProvider(BaseProvider):
     """Slack integration provider"""

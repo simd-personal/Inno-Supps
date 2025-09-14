@@ -5,7 +5,7 @@ Email providers (Gmail, Microsoft 365)
 from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
 from .base import BaseProvider
-from backend.config import settings
+from config import settings
 
 class GmailProvider(BaseProvider):
     """Gmail integration provider"""

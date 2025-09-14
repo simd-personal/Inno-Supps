@@ -3,10 +3,10 @@ Call-related background jobs
 """
 
 from typing import Dict, Any
-from backend.services.job_service import job
-from backend.agents.tools import analyze_transcript
-from backend.database import Call, Prospect, get_db
-from backend.services.llm_service import LLMService
+from services.job_service import job
+from agents.tools import analyze_transcript
+from database import Call, Prospect, get_db
+from services.llm_service import LLMService
 from sqlalchemy.orm import Session
 
 llm_service = LLMService()

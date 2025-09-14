@@ -5,7 +5,7 @@ Telephony providers (Twilio, Zoom)
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 from .base import BaseProvider
-from backend.config import settings
+from config import settings
 
 class TwilioProvider(BaseProvider):
     """Twilio integration provider"""

@@ -3,9 +3,9 @@ Calendar-related background jobs
 """
 
 from typing import Dict, Any
-from backend.services.job_service import job
-from backend.agents.tools import calendar_find_slots, calendar_book
-from backend.database import Meeting, Prospect, get_db
+from services.job_service import job
+from agents.tools import calendar_find_slots, calendar_book
+from database import Meeting, Prospect, get_db
 from sqlalchemy.orm import Session
 
 @job(queue_name="default", timeout=300)

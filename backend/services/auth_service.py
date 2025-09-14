@@ -9,9 +9,9 @@ from typing import Optional, Dict, Any
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from backend.database import User, Workspace, Membership, MembershipRole, get_db
-from backend.config import settings
-from backend.services.redis_cache import cache
+from database import User, Workspace, Membership, MembershipRole, get_db
+from config import settings
+from services.redis_cache import cache
 
 # Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

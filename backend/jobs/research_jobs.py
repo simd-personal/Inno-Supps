@@ -3,9 +3,9 @@ Research-related background jobs
 """
 
 from typing import Dict, Any
-from backend.services.job_service import job
-from backend.agents.tools import generate_niche_report, generate_growth_plan
-from backend.database import ResearchBrief, GrowthPlan, get_db
+from services.job_service import job
+from agents.tools import generate_niche_report, generate_growth_plan
+from database import ResearchBrief, GrowthPlan, get_db
 from sqlalchemy.orm import Session
 
 @job(queue_name="low", timeout=1800)  # 30 minutes for research

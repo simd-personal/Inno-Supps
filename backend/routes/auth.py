@@ -6,8 +6,8 @@ from fastapi import APIRouter, Depends, HTTPException, status, Request, Response
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, EmailStr
 from typing import Optional
-from backend.services.auth_service import auth_service
-from backend.database import get_db, User, Workspace
+from services.auth_service import auth_service
+from database import get_db, User, Workspace
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/auth", tags=["authentication"])

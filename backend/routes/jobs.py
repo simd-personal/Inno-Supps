@@ -4,9 +4,9 @@ Job management routes for Inno Supps
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List, Dict, Any
-from backend.services.job_service import job_service
-from backend.services.auth_service import auth_service, get_current_user
-from backend.database import User
+from services.job_service import job_service
+from services.auth_service import auth_service, get_current_user
+from database import User
 
 router = APIRouter(prefix="/jobs", tags=["jobs"])
 

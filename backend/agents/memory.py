@@ -5,8 +5,8 @@ Agent memory interface backed by Postgres
 from typing import Any, Optional, List
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
-from backend.database import AgentMemory as AgentMemoryModel, get_db
-from backend.config import settings
+from database import AgentMemory as AgentMemoryModel, get_db
+from config import settings
 
 class AgentMemory:
     def __init__(self, workspace_id: str, user_id: Optional[str] = None):

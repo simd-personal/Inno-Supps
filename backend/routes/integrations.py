@@ -5,9 +5,9 @@ Integration management routes for Inno Supps
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import Dict, Any, List
 from pydantic import BaseModel
-from backend.services.integration_service import integration_service
-from backend.services.auth_service import auth_service, get_current_user, get_current_workspace
-from backend.database import User, IntegrationType
+from services.integration_service import integration_service
+from services.auth_service import auth_service, get_current_user, get_current_workspace
+from database import User, IntegrationType
 
 router = APIRouter(prefix="/integrations", tags=["integrations"])
 
