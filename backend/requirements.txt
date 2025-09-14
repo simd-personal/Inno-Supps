@@ -14,3 +14,4 @@ rq==1.15.1
 rq-scheduler==0.11.0
 openai==1.3.7
 loguru==0.7.2
+requests==2.31.0

@@ -5,7 +5,8 @@ Job management routes for Inno Supps
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List, Dict, Any
 from services.job_service import job_service
-from services.auth_service import auth_service, get_current_user
+from services.auth_service import auth_service
+from routes.auth import get_current_user
 from database import User
 
 router = APIRouter(prefix="/jobs", tags=["jobs"])
@@ -69,7 +70,7 @@ async def trigger_email_ingest(
             detail="Access denied to workspace"
         )
     
-    from backend.jobs.email_jobs import ingest_email
+    from jobs.email_jobs import ingest_email
     job_id = job_service.enqueue_job(
         "ingest_email",
         ingest_email,
@@ -94,7 +95,7 @@ async def trigger_niche_research(
             detail="Access denied to workspace"
         )
     
-    from backend.jobs.research_jobs import run_niche_research
+    from jobs.research_jobs import run_niche_research
     job_id = job_service.enqueue_job(
         "run_niche_research",
         run_niche_research,

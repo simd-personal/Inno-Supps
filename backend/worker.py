@@ -6,8 +6,8 @@ RQ Worker for Inno Supps background jobs
 import os
 import sys
 from rq import Worker, Connection
-from backend.config import settings
-from backend.services.job_service import default_queue, high_queue, low_queue
+from config import settings
+from services.job_service import default_queue, high_queue, low_queue
 
 def main():
     """Start RQ worker"""
@@ -15,7 +15,7 @@ def main():
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     
     # Import all job modules to register them
-    from backend.jobs import email_jobs, calendar_jobs, call_jobs, research_jobs
+    from jobs import email_jobs, calendar_jobs, call_jobs, research_jobs
     
     # Create worker
     with Connection():

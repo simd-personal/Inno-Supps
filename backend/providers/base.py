@@ -4,7 +4,7 @@ Base provider interface for integrations
 
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional
-from backend.config import settings
+from config import settings
 
 class BaseProvider(ABC):
     """Base class for all integration providers"""

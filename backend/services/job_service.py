@@ -7,7 +7,6 @@ import hashlib
 from datetime import datetime, timedelta
 from typing import Any, Dict, Optional, Callable
 from rq import Queue, Worker
-from rq import Connection
 from rq.job import Job
 from rq_scheduler import Scheduler
 from config import settings

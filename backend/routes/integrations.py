@@ -6,7 +6,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from typing import Dict, Any, List
 from pydantic import BaseModel
 from services.integration_service import integration_service
-from services.auth_service import auth_service, get_current_user, get_current_workspace
+from services.auth_service import auth_service
+from routes.auth import get_current_user, get_current_workspace
 from database import User, IntegrationType
 
 router = APIRouter(prefix="/integrations", tags=["integrations"])
