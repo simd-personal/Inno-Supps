@@ -1,5 +1,5 @@
 """
-Database models and configuration for Inno Supps
+SQLite-compatible database models for Inno Supps
 """
 
 from sqlalchemy import create_engine, Column, Integer, String, Text, DateTime, Boolean, JSON, Float, ForeignKey, Enum as SQLEnum
@@ -12,18 +12,11 @@ import uuid
 # Import config
 from config import settings
 
-# Create engine
+# Create engine with SQLite
 engine = create_engine(settings.database_url, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
-
-# Helper function for UUID columns in SQLite
-def uuid_column():
-    return Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-
-def uuid_foreign_key(foreign_table):
-    return Column(String(36), ForeignKey(f"{foreign_table}.id"), nullable=False)
 
 # Enums
 class MembershipRole(str, Enum):
@@ -59,6 +52,13 @@ class JobStatus(str, Enum):
 class MessageDirection(str, Enum):
     INBOUND = "inbound"
     OUTBOUND = "outbound"
+
+# Helper function for UUID columns in SQLite
+def uuid_column():
+    return Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+
+def uuid_foreign_key(foreign_table):
+    return Column(String(36), ForeignKey(f"{foreign_table}.id"), nullable=False)
 
 # Models
 class User(Base):
@@ -145,7 +145,7 @@ class Prospect(Base):
     linkedin_url = Column(String(500))
     enrichment_json = Column(JSON)
     score = Column(Float, default=0.0)
-    summary_embedding = Column(Text)  # OpenAI embedding dimension
+    summary_embedding = Column(Text)  # Store as JSON string for SQLite
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -291,7 +291,7 @@ class Call(Base):
     prospect_id = Column(String(36), ForeignKey("prospects.id"))
     recording_url = Column(String(500))
     transcript_text = Column(Text)
-    transcript_vector = Column(Text)
+    transcript_vector = Column(Text)  # Store as JSON string for SQLite
     analysis_json = Column(JSON)
     created_at = Column(DateTime, default=datetime.utcnow)
     

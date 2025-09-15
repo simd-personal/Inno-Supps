@@ -20,7 +20,7 @@ redis_service = RedisService()
 async def lifespan(app: FastAPI):
     # Startup
     try:
-        await init_db()
+        init_db()
         print("✅ Database initialized successfully")
     except Exception as e:
         print(f"⚠️  Database initialization failed: {e}")
@@ -86,10 +86,12 @@ async def health_check():
     db_status = "healthy"
     try:
         from database import engine
+        from sqlalchemy import text
         with engine.connect() as conn:
-            conn.execute("SELECT 1")
-    except Exception:
+            conn.execute(text("SELECT 1"))
+    except Exception as e:
         db_status = "unhealthy"
+        print(f"Database health check failed: {e}")
     
     return {
         "status": "healthy",

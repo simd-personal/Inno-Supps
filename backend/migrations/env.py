@@ -29,7 +29,8 @@ target_metadata = Base.metadata
 # ... etc.
 
 def get_url():
-    return os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/inno_supps")
+    from config import settings
+    return settings.database_url
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
